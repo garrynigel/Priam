@@ -59,7 +59,7 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
     private final CopyOnWriteArrayList<EventObserver<BackupEvent>> observers =
             new CopyOnWriteArrayList<>();
     private final IConfiguration configuration;
-    protected final BackupMetrics backupMetrics;
+    //protected final BackupMetrics backupMetrics;
     private final Set<Path> tasksQueued;
     private final ThreadPoolExecutor fileUploadExecutor;
     private final ThreadPoolExecutor fileDownloadExecutor;
@@ -71,14 +71,14 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
     @Inject
     public AbstractFileSystem(
             IConfiguration configuration,
-            BackupMetrics backupMetrics,
-            BackupNotificationMgr backupNotificationMgr,
+            //BackupMetrics backupMetrics,
+            //BackupNotificationMgr backupNotificationMgr,
             Provider<AbstractBackupPath> pathProvider) {
         this.configuration = configuration;
-        this.backupMetrics = backupMetrics;
+        //this.backupMetrics = backupMetrics;
         this.pathProvider = pathProvider;
         // Add notifications.
-        this.addObserver(backupNotificationMgr);
+        //this.addObserver(backupNotificationMgr);
         this.objectCache =
                 CacheBuilder.newBuilder().maximumSize(configuration.getBackupQueueSize()).build();
         tasksQueued = new ConcurrentHashMap<>().newKeySet();
@@ -89,9 +89,10 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
         */
         BlockingQueue<Runnable> uploadQueue =
                 new ArrayBlockingQueue<>(configuration.getBackupQueueSize());
-        PolledMeter.using(backupMetrics.getRegistry())
+        /*PolledMeter.using(backupMetrics.getRegistry())
                 .withName(backupMetrics.uploadQueueSize)
                 .monitorSize(uploadQueue);
+         */
         this.fileUploadExecutor =
                 new BlockingSubmitThreadPoolExecutor(
                         configuration.getBackupThreads(),
@@ -100,9 +101,10 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
 
         BlockingQueue<Runnable> downloadQueue =
                 new ArrayBlockingQueue<>(configuration.getDownloadQueueSize());
-        PolledMeter.using(backupMetrics.getRegistry())
+        /*PolledMeter.using(backupMetrics.getRegistry())
                 .withName(backupMetrics.downloadQueueSize)
                 .monitorSize(downloadQueue);
+         */
         this.fileDownloadExecutor =
                 new BlockingSubmitThreadPoolExecutor(
                         configuration.getRestoreThreads(),
@@ -139,11 +141,11 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
             // Note we only downloaded the bytes which are represented on file system (they are
             // compressed and maybe encrypted).
             // File size after decompression or decryption might be more/less.
-            backupMetrics.recordDownloadRate(getFileSize(remotePath));
-            backupMetrics.incrementValidDownloads();
+            //backupMetrics.recordDownloadRate(getFileSize(remotePath));
+            //backupMetrics.incrementValidDownloads();
             logger.info("Successfully downloaded file: {} to location: {}", remotePath, localPath);
         } catch (Exception e) {
-            backupMetrics.incrementInvalidDownloads();
+            //backupMetrics.incrementInvalidDownloads();
             logger.error("Error while downloading file: {} to location: {}", remotePath, localPath);
             throw new BackupRestoreException(e.getMessage());
         }
@@ -206,8 +208,8 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
                     // evicting our SST_V2 results.
                     if (path.getType() == BackupFileType.SST_V2) addObjectCache(remotePath);
 
-                    backupMetrics.recordUploadRate(uploadedFileSize);
-                    backupMetrics.incrementValidUploads();
+                    //backupMetrics.recordUploadRate(uploadedFileSize);
+                    //backupMetrics.incrementValidUploads();
                     path.setCompressedFileSize(uploadedFileSize);
                     notifyEventSuccess(new BackupEvent(path));
                 } else {
@@ -225,7 +227,7 @@ public abstract class AbstractFileSystem implements IBackupFileSystem, EventGene
                                     localPath.toFile().getAbsolutePath()));
 
             } catch (Exception e) {
-                backupMetrics.incrementInvalidUploads();
+                //backupMetrics.incrementInvalidUploads();
                 notifyEventFailure(new BackupEvent(path));
                 logger.error(
                         "Error while uploading file: {} to location: {}. Exception: Msg: [{}], Trace: {}",

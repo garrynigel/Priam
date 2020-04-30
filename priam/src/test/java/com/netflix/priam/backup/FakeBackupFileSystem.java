@@ -45,7 +45,7 @@ public class FakeBackupFileSystem extends AbstractFileSystem {
             BackupMetrics backupMetrics,
             BackupNotificationMgr backupNotificationMgr,
             Provider<AbstractBackupPath> pathProvider) {
-        super(configuration, backupMetrics, backupNotificationMgr, pathProvider);
+        super(configuration, pathProvider);
     }
 
     public void setupTest(List<String> files) {

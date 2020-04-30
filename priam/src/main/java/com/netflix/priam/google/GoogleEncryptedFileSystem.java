@@ -65,9 +65,8 @@ public class GoogleEncryptedFileSystem extends AbstractFileSystem {
             Provider<AbstractBackupPath> pathProvider,
             final IConfiguration config,
             @Named("gcscredential") ICredentialGeneric credential,
-            BackupMetrics backupMetrics,
-            BackupNotificationMgr backupNotificationManager) {
-        super(config, backupMetrics, backupNotificationManager, pathProvider);
+            BackupMetrics backupMetrics) {
+        super(config, pathProvider);
         this.backupMetrics = backupMetrics;
         this.config = config;
         this.gcsCredential = credential;

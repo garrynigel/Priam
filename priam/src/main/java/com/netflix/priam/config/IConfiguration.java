@@ -1082,6 +1082,24 @@ public interface IConfiguration {
     }
 
     /**
+     * Returns the prefix of the path to the directory that Priam stores instance information
+     *
+     * @return A string representation of the path to the merged priam configuration directory.
+     */
+    default String getRemoteFSInstancePrefix() {
+        return "instance-info/";
+    }
+
+    /**
+     * Returns the prefix of the path to the local directory that Priam stores instance information
+     *
+     * @return A string representation of the path to the merged priam configuration directory.
+     */
+    default String getLocalFSInstancePrefix() {
+        return "/tmp/instance-info/";
+    }
+
+    /**
      * Escape hatch for getting any arbitrary property by key This is useful so we don't have to
      * keep adding methods to this interface for every single configuration option ever. Also
      * exposed via HTTP at v1/config/unstructured/X

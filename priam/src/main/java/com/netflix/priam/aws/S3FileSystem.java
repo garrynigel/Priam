@@ -55,10 +55,8 @@ public class S3FileSystem extends S3FileSystemBase {
             Provider<AbstractBackupPath> pathProvider,
             ICompression compress,
             final IConfiguration config,
-            BackupMetrics backupMetrics,
-            BackupNotificationMgr backupNotificationMgr,
             InstanceInfo instanceInfo) {
-        super(pathProvider, compress, config, backupMetrics, backupNotificationMgr);
+        super(pathProvider, compress, config);
         s3Client =
                 AmazonS3Client.builder()
                         .withCredentials(cred.getAwsCredentialProvider())

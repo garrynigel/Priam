@@ -32,10 +32,8 @@ public class NullBackupFileSystem extends AbstractFileSystem {
     @Inject
     public NullBackupFileSystem(
             IConfiguration configuration,
-            BackupMetrics backupMetrics,
-            BackupNotificationMgr backupNotificationMgr,
             Provider<AbstractBackupPath> pathProvider) {
-        super(configuration, backupMetrics, backupNotificationMgr, pathProvider);
+        super(configuration, pathProvider);
     }
 
     public void shutdown() {

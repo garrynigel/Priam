@@ -18,6 +18,9 @@ package com.netflix.priam.identity;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,6 +115,28 @@ public class PriamInstance implements Serializable {
         return String.format(
                 "Hostname: %s, InstanceId: %s, APP_NAME: %s, RAC : %s Location %s, Id: %s: Token: %s",
                 getHostName(), getInstanceId(), getApp(), getRac(), getDC(), getId(), getToken());
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsn = new JSONObject();
+        jsn.put("app", getApp());
+        jsn.put("instanceId", getInstanceId());
+        jsn.put("hostname", getHostName());
+        jsn.put("id", getId());
+        jsn.put("token", getToken());
+        jsn.put("rac", getRac());
+        jsn.put("hostIp", getHostIP());
+        return jsn;
+    }
+
+    public Path pathInRemote() {
+        String remotePath = getApp() + "/" + getDC() + "/" + getId() + ".json";
+        return Paths.get(remotePath);
+    }
+
+    public Path pathInLocal() {
+        String remotePath = getApp() + "/" + getDC() + "/" + getId() + ".json";
+        return Paths.get(remotePath);
     }
 
     public String getDC() {

@@ -58,10 +58,11 @@ public abstract class S3FileSystemBase extends AbstractFileSystem {
     S3FileSystemBase(
             Provider<AbstractBackupPath> pathProvider,
             ICompression compress,
-            final IConfiguration config,
-            BackupMetrics backupMetrics,
-            BackupNotificationMgr backupNotificationMgr) {
-        super(config, backupMetrics, backupNotificationMgr, pathProvider);
+            final IConfiguration config
+            //BackupMetrics backupMetrics,
+            //BackupNotificationMgr backupNotificationMgr
+            ) {
+        super(config, pathProvider);
         this.compress = compress;
         this.config = config;
 

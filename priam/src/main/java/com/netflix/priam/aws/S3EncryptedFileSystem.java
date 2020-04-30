@@ -55,11 +55,11 @@ public class S3EncryptedFileSystem extends S3FileSystemBase {
             final IConfiguration config,
             ICredential cred,
             @Named("filecryptoalgorithm") IFileCryptography fileCryptography,
-            BackupMetrics backupMetrics,
-            BackupNotificationMgr backupNotificationMgr,
+            //BackupMetrics backupMetrics,
+            //BackupNotificationMgr backupNotificationMgr,
             InstanceInfo instanceInfo) {
 
-        super(pathProvider, compress, config, backupMetrics, backupNotificationMgr);
+        super(pathProvider, compress, config);
         this.encryptor = fileCryptography;
         super.s3Client =
                 AmazonS3Client.builder()
