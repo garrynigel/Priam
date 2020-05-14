@@ -22,8 +22,8 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class PropertiesConfigSource extends AbstractConfigSource {
     private static final Logger logger =
             LoggerFactory.getLogger(PropertiesConfigSource.class.getName());
 
-    private static final String DEFAULT_PRIAM_PROPERTIES = "Priam.properties";
+    private static final String DEFAULT_PRIAM_PROPERTIES = "/etc/priam/conf/Priam.properties";
 
     private final Map<String, String> data = Maps.newConcurrentMap();
     private final String priamFile;
@@ -58,15 +58,10 @@ public class PropertiesConfigSource extends AbstractConfigSource {
     public void initialize(final String asgName, final String region) {
         super.initialize(asgName, region);
         Properties properties = new Properties();
-        URL url = PropertiesConfigSource.class.getClassLoader().getResource(priamFile);
-        if (url != null) {
-            try {
-                properties.load(url.openStream());
-                clone(properties);
-            } catch (IOException e) {
-                logger.info("No Priam.properties. Ignore!");
-            }
-        } else {
+        try {
+            properties.load(new FileInputStream(this.priamFile));
+            clone(properties);
+        } catch (IOException e) {
             logger.info("No Priam.properties. Ignore!");
         }
     }

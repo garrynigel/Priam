@@ -92,9 +92,7 @@ public class TestCassandraMonitor {
         // Mock out the ps call
         final Runtime r = Runtime.getRuntime();
         String[] cmd = {
-            "/bin/sh",
-            "-c",
-            "ps -ef |grep -v -P \"\\sgrep\\s\" | grep " + config.getCassProcessName()
+            "/bin/sh", "-c", "ps -ef |grep -v \"\\sgrep\\s\" | grep " + config.getCassProcessName()
         };
         new Expectations(r) {
             {
@@ -135,9 +133,7 @@ public class TestCassandraMonitor {
         // Mock out the ps call
         final Runtime r = Runtime.getRuntime();
         String[] cmd = {
-            "/bin/sh",
-            "-c",
-            "ps -ef |grep -v -P \"\\sgrep\\s\" | grep " + config.getCassProcessName()
+            "/bin/sh", "-c", "ps -ef |grep -v \"\\sgrep\\s\" | grep " + config.getCassProcessName()
         };
         new Expectations(r) {
             {

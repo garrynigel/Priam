@@ -32,8 +32,6 @@ import com.netflix.priam.backup.AbstractFileSystem;
 import com.netflix.priam.backup.BackupRestoreException;
 import com.netflix.priam.compress.ICompression;
 import com.netflix.priam.config.IConfiguration;
-import com.netflix.priam.merics.BackupMetrics;
-import com.netflix.priam.notification.BackupNotificationMgr;
 import com.netflix.priam.scheduler.BlockingSubmitThreadPoolExecutor;
 import java.nio.file.Path;
 import java.util.Iterator;
@@ -59,8 +57,8 @@ public abstract class S3FileSystemBase extends AbstractFileSystem {
             Provider<AbstractBackupPath> pathProvider,
             ICompression compress,
             final IConfiguration config
-            //BackupMetrics backupMetrics,
-            //BackupNotificationMgr backupNotificationMgr
+            // BackupMetrics backupMetrics,
+            // BackupNotificationMgr backupNotificationMgr
             ) {
         super(config, pathProvider);
         this.compress = compress;

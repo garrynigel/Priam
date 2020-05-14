@@ -78,7 +78,7 @@ public class PriamServer implements IService {
     }
 
     private void createDirectories() throws IOException {
-        SystemUtils.createDirs(config.getBackupCommitLogLocation());
+        // SystemUtils.createDirs(config.getBackupCommitLogLocation());
         SystemUtils.createDirs(config.getCommitLogLocation());
         SystemUtils.createDirs(config.getCacheLocation());
         SystemUtils.createDirs(config.getDataFileLocation());

@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
-import org.apache.cassandra.io.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +31,7 @@ public class StaticMembership implements IMembership {
     private static final String INSTANCES_PRE = MEMBERSHIP_PRE + "instances.";
     private static final String RAC_NAME = MEMBERSHIP_PRE + "racname";
 
-    private static final String DEFAULT_PROP_PATH = "/etc/priam/membership.properties";
+    private static final String DEFAULT_PROP_PATH = "/etc/priam/conf/membership.properties";
 
     private static final Logger logger = LoggerFactory.getLogger(StaticMembership.class);
 
@@ -49,7 +48,11 @@ public class StaticMembership implements IMembership {
             logger.error("Exception with static membership file ", e);
             throw new RuntimeException("Problem reading static membership file. Cannot start.", e);
         } finally {
-            FileUtils.closeQuietly(fis);
+            try {
+                if (fis != null) fis.close();
+            } catch (Exception e) {
+                logger.warn("Failed closing {}", fis, e);
+            }
         }
         String racName = config.getProperty(RAC_NAME);
         racCount = 0;

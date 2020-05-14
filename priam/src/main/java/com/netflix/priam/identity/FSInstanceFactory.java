@@ -3,15 +3,10 @@ package com.netflix.priam.identity;
 import com.google.gson.stream.JsonReader;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.netflix.priam.backup.AbstractFileSystem;
 import com.netflix.priam.backup.IBackupFileSystem;
 import com.netflix.priam.config.IConfiguration;
 import com.netflix.priam.identity.config.InstanceInfo;
 import com.netflix.priam.utils.GsonJsonSerializer;
-import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -25,6 +20,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FSInstanceFactory implements IPriamInstanceFactory<PriamInstance> {
     private static final Logger logger = LoggerFactory.getLogger(FSInstanceFactory.class);
@@ -35,7 +33,9 @@ public class FSInstanceFactory implements IPriamInstanceFactory<PriamInstance> {
 
     @Inject
     public FSInstanceFactory(
-            IConfiguration config, InstanceInfo instanceInfo, @Named("backup") IBackupFileSystem fileSystem) {
+            IConfiguration config,
+            InstanceInfo instanceInfo,
+            @Named("backup") IBackupFileSystem fileSystem) {
         this.config = config;
         this.instanceInfo = instanceInfo;
         this.fileSystem = fileSystem;

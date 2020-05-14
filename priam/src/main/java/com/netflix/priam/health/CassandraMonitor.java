@@ -80,7 +80,7 @@ public class CassandraMonitor extends Task {
             final String[] cmd = {
                 "/bin/sh",
                 "-c",
-                "ps -ef |grep -v -P \"\\sgrep\\s\" | grep " + config.getCassProcessName()
+                "ps -ef |grep -v \"\\sgrep\\s\" | grep " + config.getCassProcessName()
             };
             process = Runtime.getRuntime().exec(cmd);
             input = new BufferedReader(new InputStreamReader(process.getInputStream()));

@@ -13,51 +13,69 @@
  */
 package com.netflix.priam.identity.config;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import javax.inject.Inject;
+
 /**
- * Looks at local (system) properties for metadata about the running 'instance'. Typically, this is
+ * Looks at local (props) properties for metadata about the running 'instance'. Typically, this is
  * used for locally-deployed testing.
  */
 public class LocalInstanceInfo implements InstanceInfo {
     private static final String PREFIX = "Priam.localInstance.";
+    private static final String DEFAULT_LOCAL_CONFIG = "/etc/priam/conf/Priam.properties";
+    Properties props;
+
+    @Inject
+    public LocalInstanceInfo() {
+        this.props = new Properties();
+        try {
+            FileInputStream fis = new FileInputStream(DEFAULT_LOCAL_CONFIG);
+            props.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String getRac() {
-        return System.getProperty(PREFIX + "availabilityZone", "");
+        return props.getProperty(PREFIX + "availabilityZone", "");
     }
 
     @Override
     public String getHostname() {
-        return System.getProperty(PREFIX + "privateIp", "");
+        return props.getProperty(PREFIX + "privateIp", "");
     }
 
     @Override
     public String getHostIP() {
-        return System.getProperty(PREFIX + "privateIp", "");
+        return props.getProperty(PREFIX + "privateIp", "");
     }
 
     @Override
     public String getPrivateIP() {
-        return System.getProperty(PREFIX + "privateIp", "");
+        return props.getProperty(PREFIX + "privateIp", "");
     }
 
     @Override
     public String getInstanceId() {
-        return System.getProperty(PREFIX + "instanceId", "");
+        return props.getProperty(PREFIX + "instanceId", "");
     }
 
     @Override
     public String getInstanceType() {
-        return System.getProperty(PREFIX + "instanceType", "");
+        return props.getProperty(PREFIX + "instanceType", "");
     }
 
     @Override
     public String getVpcId() {
-        return System.getProperty(PREFIX + "vpcid", "");
+        return props.getProperty(PREFIX + "vpcid", "");
     }
 
     @Override
     public String getAutoScalingGroup() {
-        return System.getProperty(PREFIX + "asg", "");
+        return props.getProperty(PREFIX + "asg", "");
     }
 
     @Override
@@ -67,6 +85,6 @@ public class LocalInstanceInfo implements InstanceInfo {
 
     @Override
     public String getRegion() {
-        return System.getProperty(PREFIX + "region", "");
+        return props.getProperty(PREFIX + "region", "");
     }
 }

@@ -108,7 +108,7 @@ public class TestS3FileSystem {
                 backupfile,
                 0,
                 false);
-        //Assert.assertEquals(1, backupMetrics.getUploadRate().count() - noOfFilesUploaded);
+        // Assert.assertEquals(1, backupMetrics.getUploadRate().count() - noOfFilesUploaded);
     }
 
     @Test
@@ -152,7 +152,7 @@ public class TestS3FileSystem {
             // ignore
         }
         Assert.assertEquals(0, MockS3PartUploader.compattempts);
-        //Assert.assertEquals(1, backupMetrics.getInvalidUploads().count() - noOfFailures);
+        // Assert.assertEquals(1, backupMetrics.getInvalidUploads().count() - noOfFailures);
     }
 
     @Test

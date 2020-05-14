@@ -26,7 +26,7 @@ public class PriamConfigSource extends CompositeConfigSource {
 
     @Inject
     public PriamConfigSource(
-            //final SimpleDBConfigSource simpleDBConfigSource,
+            // final SimpleDBConfigSource simpleDBConfigSource,
             final PropertiesConfigSource propertiesConfigSource,
             final SystemPropertiesConfigSource systemPropertiesConfigSource) {
         // this order was based off PriamConfigurations loading.  W/e loaded last could override,

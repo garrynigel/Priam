@@ -87,7 +87,7 @@ public class TestAbstractFileSystem {
             }
         } catch (BackupRestoreException e) {
             // Verify the failure metric for upload is incremented.
-//            Assert.assertEquals(1, (int) backupMetrics.getInvalidUploads().count());
+            //            Assert.assertEquals(1, (int) backupMetrics.getInvalidUploads().count());
         }
     }
 
@@ -128,7 +128,8 @@ public class TestAbstractFileSystem {
                     2,
                     true);
             // Verify the success metric for upload is incremented.
-//            Assert.assertEquals(1, (int) backupMetrics.getValidUploads().actualCount());
+            //            Assert.assertEquals(1, (int)
+            // backupMetrics.getValidUploads().actualCount());
 
             // Verify delete of the original file if flag provided.
             Assert.assertFalse(file.exists());
@@ -141,7 +142,7 @@ public class TestAbstractFileSystem {
         // Dummy download
         myFileSystem.downloadFile(Paths.get(""), Paths.get(configuration.getDataFileLocation()), 2);
         // Verify the success metric for download is incremented.
-//        Assert.assertEquals(1, (int) backupMetrics.getValidDownloads().actualCount());
+        //        Assert.assertEquals(1, (int) backupMetrics.getValidDownloads().actualCount());
     }
 
     @Test

@@ -17,9 +17,9 @@
 package com.netflix.priam.identity;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

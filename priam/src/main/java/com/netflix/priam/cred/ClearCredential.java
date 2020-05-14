@@ -22,7 +22,6 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-import org.apache.cassandra.io.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +33,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ClearCredential implements ICredential {
     private static final Logger logger = LoggerFactory.getLogger(ClearCredential.class);
-    private static final String CRED_FILE = "/etc/awscredential.properties";
+    private static final String CRED_FILE = "/etc/priam/conf/awscredential.properties";
     private final String AWS_ACCESS_ID;
     private final String AWS_KEY;
 

@@ -28,6 +28,7 @@ import com.netflix.priam.backup.IBackupFileSystem;
 import com.netflix.priam.backupv2.IMetaProxy;
 import com.netflix.priam.backupv2.MetaV1Proxy;
 import com.netflix.priam.backupv2.MetaV2Proxy;
+import com.netflix.priam.cli.StaticMembership;
 import com.netflix.priam.cred.ICredential;
 import com.netflix.priam.cred.ICredentialGeneric;
 import com.netflix.priam.cryptography.IFileCryptography;
@@ -36,6 +37,7 @@ import com.netflix.priam.cryptography.pgp.PgpCryptography;
 import com.netflix.priam.google.GcsCredential;
 import com.netflix.priam.google.GoogleEncryptedFileSystem;
 import com.netflix.priam.identity.FSInstanceFactory;
+import com.netflix.priam.identity.IMembership;
 import com.netflix.priam.identity.IPriamInstanceFactory;
 import com.netflix.priam.identity.config.InstanceInfo;
 import com.netflix.priam.identity.config.LocalInstanceInfo;
@@ -78,7 +80,7 @@ public class PriamGuiceModule extends AbstractModule {
         bind(IMetaProxy.class).annotatedWith(Names.named("v2")).to(MetaV2Proxy.class);
         bind(Registry.class).toInstance(new NoopRegistry());
         bind(InstanceInfo.class).to(LocalInstanceInfo.class);
-        bind(InstanceInfo.class).to(LocalInstanceInfo.class);
         bind(IPriamInstanceFactory.class).to(FSInstanceFactory.class);
+        bind(IMembership.class).to(StaticMembership.class);
     }
 }

@@ -52,6 +52,11 @@ public class PriamConfiguration implements IConfiguration {
     }
 
     @Override
+    public String getCassandraBaseDirectory() {
+        return config.get(PRIAM_PRE + ".cass.base", "/var/lib/cassandra");
+    }
+
+    @Override
     public String getCassStartupScript() {
         return config.get(PRIAM_PRE + ".cass.startscript", "/etc/init.d/cassandra start");
     }

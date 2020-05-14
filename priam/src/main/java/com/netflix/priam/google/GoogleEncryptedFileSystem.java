@@ -31,7 +31,6 @@ import com.netflix.priam.config.IConfiguration;
 import com.netflix.priam.cred.ICredentialGeneric;
 import com.netflix.priam.cred.ICredentialGeneric.KEY;
 import com.netflix.priam.merics.BackupMetrics;
-import com.netflix.priam.notification.BackupNotificationMgr;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;

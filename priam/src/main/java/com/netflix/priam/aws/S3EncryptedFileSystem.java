@@ -31,8 +31,6 @@ import com.netflix.priam.config.IConfiguration;
 import com.netflix.priam.cred.ICredential;
 import com.netflix.priam.cryptography.IFileCryptography;
 import com.netflix.priam.identity.config.InstanceInfo;
-import com.netflix.priam.merics.BackupMetrics;
-import com.netflix.priam.notification.BackupNotificationMgr;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.Iterator;
@@ -55,8 +53,8 @@ public class S3EncryptedFileSystem extends S3FileSystemBase {
             final IConfiguration config,
             ICredential cred,
             @Named("filecryptoalgorithm") IFileCryptography fileCryptography,
-            //BackupMetrics backupMetrics,
-            //BackupNotificationMgr backupNotificationMgr,
+            // BackupMetrics backupMetrics,
+            // BackupNotificationMgr backupNotificationMgr,
             InstanceInfo instanceInfo) {
 
         super(pathProvider, compress, config);
