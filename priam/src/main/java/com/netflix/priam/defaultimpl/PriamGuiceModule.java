@@ -18,6 +18,7 @@ package com.netflix.priam.defaultimpl;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import com.netflix.priam.aws.IAMCredential;
 import com.netflix.priam.aws.S3CrossAccountFileSystem;
 import com.netflix.priam.aws.S3EncryptedFileSystem;
 import com.netflix.priam.aws.S3FileSystem;
@@ -82,5 +83,6 @@ public class PriamGuiceModule extends AbstractModule {
         bind(InstanceInfo.class).to(LocalInstanceInfo.class);
         bind(IPriamInstanceFactory.class).to(FSInstanceFactory.class);
         bind(IMembership.class).to(StaticMembership.class);
+        bind(ICredential.class).to(IAMCredential.class);
     }
 }
